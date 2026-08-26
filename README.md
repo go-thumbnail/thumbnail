@@ -2,7 +2,6 @@
 
 [![CI](https://github.com/go-thumbnail/thumbnail/actions/workflows/ci.yml/badge.svg)](https://github.com/go-thumbnail/thumbnail/actions/workflows/ci.yml)
 [![Go Reference](https://pkg.go.dev/badge/github.com/go-thumbnail/thumbnail.svg)](https://pkg.go.dev/github.com/go-thumbnail/thumbnail)
-[![Go Report Card](https://goreportcard.com/badge/github.com/go-thumbnail/thumbnail)](https://goreportcard.com/report/github.com/go-thumbnail/thumbnail)
 [![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-blue.svg)](LICENSE)
 [![coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](#tests)
 
