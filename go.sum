@@ -8,10 +8,14 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/go-gfx/gfx v0.16.0 h1:HYlQrz2kHm+Vg1aBotnO6O9yfadNqWVrPK+b0uqxtKg=
 github.com/go-gfx/gfx v0.16.0/go.mod h1:VAK6hgCgkhT3j3ek2K7G8zDfkCPD3RCF45UbcRlCV8Q=
+github.com/go-gfx/gfx v0.19.0 h1:nA2Eg8Aq2kytR5Hrm/eQ6618w4vT0+Ao8BMZiuYh84c=
+github.com/go-gfx/gfx v0.19.0/go.mod h1:VAK6hgCgkhT3j3ek2K7G8zDfkCPD3RCF45UbcRlCV8Q=
 github.com/go-images/images v0.0.0-20260805203258-4b7a400612e8 h1:jIJ8nz40LzlBSs/yFTILzQcxnVtTI01AyE8RJSbghu0=
 github.com/go-images/images v0.0.0-20260805203258-4b7a400612e8/go.mod h1:nWwQCf77xG1GhaSD3rvlp7FNjjDhz47vrztyeBvIerk=
 github.com/go-images/images v0.0.0-20260830151046-7e8189dc2288 h1:+ljs5FdeIrwsVzMdH43o72xjzBIc8ZJ/gnW6KK0tRrw=
 github.com/go-images/images v0.0.0-20260830151046-7e8189dc2288/go.mod h1:Rz3bjq22JH21J8ipYRVLsJCB7QAEDjfHnxR7JCOmc54=
+github.com/go-images/images v0.0.0-20260831115433-23d959d868e3 h1:SinmtXWpA4a30ZQ5A9QI9YrsYvytmLGeTRVbXqqEezw=
+github.com/go-images/images v0.0.0-20260831115433-23d959d868e3/go.mod h1:Epqq+oFyfwKIS4zmrr12eZVtCuwXhoxV6E+OBEnNsFs=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/sergeymakinen/go-bmp v1.0.0 h1:SdGTzp9WvCV0A1V0mBeaS7kQAwNLdVJbmHlqNWq0R+M=
