@@ -6,10 +6,10 @@ github.com/ajroetker/go-jpeg2000 v0.0.2 h1:ni8brffZrci4Kacx3nM5d92ipmTDfak84KgHY
 github.com/ajroetker/go-jpeg2000 v0.0.2/go.mod h1:7ld88W47lZy0x8gRQesRGAonDPOpr6ev8rckjCAfbzE=
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1VwoXQT9A3Wy9MM3WgvqSxFWenqJduM=
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/go-gfx/gfx v0.20.0 h1:gZheZMfwkBm1mkcIqcAMiLwV/mZkkQxx7TfEJ1+6JB8=
-github.com/go-gfx/gfx v0.20.0/go.mod h1:VAK6hgCgkhT3j3ek2K7G8zDfkCPD3RCF45UbcRlCV8Q=
-github.com/go-images/images v0.0.0-20260910072158-ed2a303027a2 h1:9a68bcU99nJ0ef9p+nOSmvRcgEDUrYRFrIquh3diQJg=
-github.com/go-images/images v0.0.0-20260910072158-ed2a303027a2/go.mod h1:VKoOT5YhxwjzPyibxlyO7zZ2xasGl7qnD23EqNIfTRM=
+github.com/go-gfx/gfx v0.24.0 h1:4ow4Mqh0WV42iMV8Pe24XWLy4YsJrKr+S1V+/Hk8RHc=
+github.com/go-gfx/gfx v0.24.0/go.mod h1:5wUl8qCvaooyJ9Ly0oS2TLlawlvAp3kosrxh5kfxVTo=
+github.com/go-images/images v0.0.0-20260912071231-12ebfec58453 h1:TgOeSHKvo21u4jA1z1NjO0SzXAV+nAdP6cW574ZSd7M=
+github.com/go-images/images v0.0.0-20260912071231-12ebfec58453/go.mod h1:YYnnR2PknaSv3H4x1gDiElP7Urzat46f8QRo3wlZn1E=
 github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 h1:Jamvg5psRIccs7FGNTlIRMkT8wgtp5eCXdBlqhYGL6U=
 github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/sergeymakinen/go-bmp v1.0.0 h1:SdGTzp9WvCV0A1V0mBeaS7kQAwNLdVJbmHlqNWq0R+M=
