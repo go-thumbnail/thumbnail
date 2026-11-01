@@ -12,6 +12,8 @@ import (
 	_ "image/jpeg"
 	_ "image/png"
 	"os"
+
+	"github.com/go-gfx/gfx/codec"
 )
 
 // Provider decodes or synthesizes the full-resolution source image identified
@@ -27,8 +29,14 @@ type Provider interface {
 // path using the standard library's registered decoders (PNG, JPEG, GIF). If
 // MaxBytes is positive, sources whose on-disk size exceeds MaxBytes are rejected
 // before decoding to bound resource use.
+//
+// A source whose header declares more than MaxPixels pixels is rejected too,
+// before the decoder allocates its raster, with an error wrapping
+// codec.ErrTooLarge. Zero means codec.DefaultMaxPixels (40 megapixels); a
+// photo library with 50-megapixel files raises it (WithMaxPixels).
 type FileProvider struct {
-	MaxBytes int64
+	MaxBytes  int64
+	MaxPixels int
 }
 
 // Thumbnail reads and decodes the image file at path.
@@ -40,6 +48,21 @@ func (p FileProvider) Thumbnail(path string) (image.Image, error) {
 	if p.MaxBytes > 0 && int64(len(data)) > p.MaxBytes {
 		return nil, fmt.Errorf("thumbnail: source %q is %d bytes, exceeds limit %d",
 			path, len(data), p.MaxBytes)
+	}
+	// ⛔ The header first: the standard decoders allocate the whole raster from
+	// the size the FILE declares, and a 1x1 PNG can declare 16000x16000 (a
+	// gigabyte).
+	cfg, _, err := image.DecodeConfig(bytes.NewReader(data))
+	if err != nil {
+		return nil, err
+	}
+	max := int64(p.MaxPixels)
+	if max <= 0 {
+		max = codec.DefaultMaxPixels
+	}
+	if px := int64(cfg.Width) * int64(cfg.Height); px > max {
+		return nil, fmt.Errorf("thumbnail: source %q: %w: %dx%d is %d pixels, past the %d allowed",
+			path, codec.ErrTooLarge, cfg.Width, cfg.Height, px, max)
 	}
 	img, _, err := image.Decode(bytes.NewReader(data))
 	if err != nil {

@@ -15,6 +15,7 @@ import (
 	"strconv"
 
 	"github.com/adrg/xdg"
+	"github.com/go-gfx/gfx/codec"
 )
 
 // defaultMaxBytes bounds the size of a source file the default provider will
@@ -54,6 +55,9 @@ type Cache struct {
 	Software string
 	// MaxBytes bounds the default provider's source file size.
 	MaxBytes int64
+	// MaxPixels bounds the default provider's source image size, from its
+	// header, before decoding (default codec.DefaultMaxPixels, 40 megapixels).
+	MaxPixels int
 }
 
 // Option configures a Cache in New.
@@ -77,6 +81,12 @@ func WithSoftware(s string) Option { return func(c *Cache) { c.Software = s } }
 // WithMaxBytes bounds the default provider's source file size (0 disables it).
 func WithMaxBytes(n int64) Option { return func(c *Cache) { c.MaxBytes = n } }
 
+// WithMaxPixels sets the pixel ceiling of the default provider: a source whose
+// header declares more is refused (error wrapping codec.ErrTooLarge) before it is
+// decoded. A photo library with 50-megapixel files raises it; zero or negative
+// means codec.DefaultMaxPixels.
+func WithMaxPixels(n int) Option { return func(c *Cache) { c.MaxPixels = n } }
+
 // defaultRoot returns $XDG_CACHE_HOME/thumbnails, read at call time.
 func defaultRoot() string { return filepath.Join(xdg.CacheHome, "thumbnails") }
 
@@ -88,6 +98,8 @@ func New(size Size, opts ...Option) *Cache {
 		AppName:  "go-thumbnail",
 		Software: "go-thumbnail/thumbnail",
 		MaxBytes: defaultMaxBytes,
+
+		MaxPixels: codec.DefaultMaxPixels,
 	}
 	for _, o := range opts {
 		o(c)
@@ -96,7 +108,7 @@ func New(size Size, opts ...Option) *Cache {
 		c.Root = defaultRoot()
 	}
 	if c.Provider == nil {
-		c.Provider = FileProvider{MaxBytes: c.MaxBytes}
+		c.Provider = FileProvider{MaxBytes: c.MaxBytes, MaxPixels: c.MaxPixels}
 	}
 	return c
 }
@@ -165,8 +177,14 @@ func (c *Cache) get(uri string) (string, image.Image, error) {
 	// Serve a still-valid cached thumbnail.
 	if data, rerr := readFile(thumbPath); rerr == nil {
 		if txt, terr := readText(data); terr == nil && txt[KeyMTime] == mtime {
-			if img, derr := png.Decode(bytes.NewReader(data)); derr == nil {
-				return thumbPath, img, nil
+			// ⛔ A cached thumbnail fits its size bucket by construction, so the
+			// bucket is the structural bound; a cache file claiming more (a
+			// planted or corrupt one) is a miss and is regenerated, never decoded.
+			if cfg, cerr := png.DecodeConfig(bytes.NewReader(data)); cerr == nil &&
+				cfg.Width <= c.Size.Pixels() && cfg.Height <= c.Size.Pixels() {
+				if img, derr := png.Decode(bytes.NewReader(data)); derr == nil {
+					return thumbPath, img, nil
+				}
 			}
 		}
 	}

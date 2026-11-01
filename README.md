@@ -98,7 +98,20 @@ scaled, err := c.Live(src)
 | `Filter` | `Bilinear` (go-images), `CatmullRom` (x/image/draw). |
 
 Options: `WithRoot`, `WithFilter`, `WithAppName`, `WithProvider`,
-`WithSoftware`, `WithMaxBytes`.
+`WithSoftware`, `WithMaxBytes`, `WithMaxPixels`.
+
+### Size limits
+
+A source file states its own dimensions: a 1×1 PNG whose header claims
+16000×16000 makes the standard decoder allocate about a gigabyte. The default
+provider therefore reads the header first and refuses a source above
+`MaxPixels` — **default 40 000 000 pixels** (`codec.DefaultMaxPixels`; a
+50-megapixel camera photo is above it) — with an error wrapping
+`codec.ErrTooLarge`, before anything is allocated. A photo library raises the
+ceiling: `thumbnail.New(thumbnail.Large, thumbnail.WithMaxPixels(120_000_000))`
+(`FileProvider{MaxPixels: n}` for a custom provider setup). `MaxBytes` bounds the
+file size as before. A cached thumbnail whose header claims more than its size
+bucket is treated as a miss and regenerated.
 
 ## Scope
 
