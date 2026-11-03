@@ -4,8 +4,8 @@ go 1.27.1
 
 require (
 	github.com/adrg/xdg v0.5.3
-	github.com/go-gfx/gfx v0.37.0
-	github.com/go-images/images v0.2.1
+	github.com/go-gfx/gfx v0.41.0
+	github.com/go-images/images v0.3.0
 	golang.org/x/image v0.47.0
 )
 
